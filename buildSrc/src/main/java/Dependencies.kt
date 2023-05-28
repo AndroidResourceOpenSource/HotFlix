@@ -2,6 +2,8 @@ import Versions.hilt_version
 import Versions.moshi_version
 import Versions.nav_version
 import Versions.retrofitVersion
+import Versions.room_version
+import Versions.timber_version
 
 object Versions {
     const val ktx = "1.10.1"
@@ -12,6 +14,8 @@ object Versions {
     const val retrofitVersion = "2.9.0"
     const val moshi_version = "1.14.0"
     const val nav_version = "2.5.3"
+    const val timber_version="5.0.1"
+    const val room_version = "2.5.1"
 }
 
 object Plugins {
@@ -66,8 +70,7 @@ object Deps {
     }
 
     object Hilt {
-        const val hiltAndroidGradlePlugin =
-            "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        const val hiltAndroidGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         const val android = "com.google.dagger:hilt-android:$hilt_version"
         const val lifecycleViewModel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
         const val androidCompiler = "com.google.dagger:hilt-android-compiler:$hilt_version"
@@ -90,6 +93,23 @@ object Deps {
 
     object NavigationComponent {
         const val navComponent = "androidx.navigation:navigation-compose:$nav_version"
+    }
+
+    object Logging{
+        const val timber="com.jakewharton.timber:timber:$timber_version"
+    }
+
+    object Room{
+        const val runtime="androidx.room:room-runtime:$room_version"
+        const val compiler="androidx.room:room-compiler:$room_version"
+        // To use Kotlin annotation processing tool (kapt)
+        const val roomAnnotations= "androidx.room:room-compiler:$room_version"
+        const val room_extns="androidx.room:room-ktx:$room_version"
+
+        // optional - Test helpers
+        const val roomTestHelpers=("androidx.room:room-testing:$room_version")
+        // optional - Paging 3 Integration
+        const val roomPaging=("androidx.room:room-paging:$room_version")
     }
 
 
