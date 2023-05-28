@@ -86,7 +86,7 @@ dependencies {
 
     //region Room Db
     implementation(Deps.Room.runtime)
-    implementation(Deps.Room.compiler)
+    //implementation(Deps.Room.compiler)
     implementation(Deps.Room.room_extns)
     implementation(Deps.Room.roomPaging)
     kapt(Deps.Room.roomAnnotations)
