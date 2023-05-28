@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -13,6 +15,11 @@ android {
         targetSdk = Config.targetSdk
         versionCode = Config.versionCode
         versionName = Config.versionName
+
+//
+//        buildConfigField("String", "BASE_URL", "http://api.themoviedb.org/3/")
+//        buildConfigField("String", "API_KEY", "${network_url}")
+
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -30,11 +37,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -49,12 +56,35 @@ android {
     }
 }
 
+
 dependencies {
 
     Deps.Androidx.androidx.forEach(::implementation)
     implementation(platform(Deps.compose.composeBom))
     Deps.compose.composeBomDeps.forEach(::implementation)
-   // implementation(Deps.Androidx.androidx)
+
+    //navigation component
+    implementation(Deps.NavigationComponent.navComponent)
+
+    // Dagger hilt
+    implementation(Deps.Hilt.android)
+    kapt(Deps.Hilt.androidCompiler)
+
+
+    //region Network Libs
+    implementation(Deps.Retrofit.retrofit)
+
+    implementation(Deps.Retrofit.converterMoshi)
+    implementation(Deps.Retrofit.moshi)
+
+    implementation(platform(Deps.Okhttp.okhttpBom))
+    implementation(Deps.Okhttp.okhttp)
+    implementation(Deps.Okhttp.okhttp_logging)
+
+
+    //endregion
+
+
 
 
     //*********test Library ************
@@ -64,6 +94,5 @@ dependencies {
     androidTestImplementation(platform(Deps.compose.composeBom))
     Deps.testLibs.composeAndroidTests.forEach(::androidTestImplementation)
     Deps.testLibs.composeDebugTests.forEach(::debugImplementation)
-//    androidTestImplementation(Deps.testLibs.composeAndroidTests)
-//    debugImplementation(Deps.testLibs.composeDebugTests)
+
 }
